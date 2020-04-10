@@ -1,5 +1,6 @@
-import 'package:animationexample/loginpage.dart';
-import 'package:animationexample/radialmenu.dart';
+import 'package:animationexample/herowidget/herofirstpage.dart';
+import 'package:animationexample/loginpage/loginpage.dart';
+import 'package:animationexample/radialmenu/radialmenu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -46,26 +47,35 @@ class MainPage extends StatelessWidget {
           padding: EdgeInsets.only(top: 20.0),
           child: Column(
             children: <Widget>[
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return RadialMenuBody();
-                  }));
-                },
-                child: Text('Radial Menu'),
-              ),
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return LoginPage();
-                  }));
-                },
-                child: Text('Login Page'),
-              ),
+              SingleRaisedButton(
+                  text: 'Hero Widget', navigateTo: HeroFirstPage()),
+              SingleRaisedButton(text: 'Login Page', navigateTo: LoginPage()),
+              SingleRaisedButton(
+                  text: 'Radial Menu', navigateTo: RadialMenuBody()),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class SingleRaisedButton extends StatelessWidget {
+  String text;
+  var navigateTo;
+
+  SingleRaisedButton({this.text, this.navigateTo});
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return navigateTo;
+        }));
+      },
+      child: Text(text),
     );
   }
 }
